@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Rondo Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>Rondo Chat</h1>
+        <p>Wszystkie funkcjonalności czatu obsługuje Quatarly API.</p>
+        <div class="toolbar">
+          <label for="modelSelect">Model:</label>
+          <select id="modelSelect"></select>
+          <button id="creditsBtn" type="button">Sprawdź kredyty</button>
+        </div>
+        <small id="creditsInfo"></small>
+      </header>
+
+      <section id="messages" class="messages" aria-live="polite"></section>
+
+      <form id="chatForm" class="composer">
+        <textarea id="prompt" placeholder="Napisz wiadomość..." required rows="3"></textarea>
+        <div class="composer__actions">
+          <button id="sendBtn" type="submit">Wyślij</button>
+          <button id="clearBtn" type="button">Wyczyść czat</button>
+        </div>
+      </form>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
