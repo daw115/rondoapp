@@ -7,7 +7,7 @@ Webowy chat (frontend + backend) pod API Quatarly (`/chat/completions`) z modele
 - Node.js 20+
 - Klucz API Quatarly (`qua-...`)
 
-## Szybki start
+## Szybki start lokalny
 
 ```bash
 npm install
@@ -16,15 +16,7 @@ cp .env.example .env
 npm start
 ```
 
-Aplikacja działa na `http://localhost:3000`.
-
-## Ustawienie zmiennych środowiskowych (jak w setup video)
-
-```bash
-export ANTHROPIC_API_KEY="your-quatarly-api-key"
-export ANTHROPIC_BASE_URL="https://api.quatarly.cloud/v0"
-export CHAT_MODEL="claude-sonnet-4-5"
-```
+Aplikacja działa lokalnie na `http://localhost:3000`.
 
 ## Zmienne środowiskowe
 
@@ -39,6 +31,31 @@ export CHAT_MODEL="claude-sonnet-4-5"
 - `POST /api/chat` – wysyła historię rozmowy do Quatarly (`/chat/completions`)
 - `GET /api/credits` – pobiera saldo kredytów (`/user/credits/:apiKey`)
 - `GET /healthz` – healthcheck + informacja czy API key jest skonfigurowany
+
+## Wystawienie online (Railway)
+
+Repo jest gotowy pod deploy (dodany `railway.json` + zdrowie `/healthz`).
+
+1. Wrzuć repo na GitHub.
+2. Na Railway: **New Project → Deploy from GitHub Repo**.
+3. Ustaw zmienne środowiskowe:
+   - `ANTHROPIC_API_KEY=<twoj_klucz_qua>`
+   - `ANTHROPIC_BASE_URL=https://api.quatarly.cloud/v0`
+   - `CHAT_MODEL=claude-sonnet-4-5`
+4. Railway automatycznie uruchomi `npm start`.
+5. Po deployu dostaniesz publiczny URL (np. `https://twoj-projekt.up.railway.app`).
+
+### Deploy przez Railway CLI (opcjonalnie)
+
+```bash
+npm i -g @railway/cli
+railway login
+railway init
+railway up
+railway variables set ANTHROPIC_API_KEY=twoj_klucz
+railway variables set ANTHROPIC_BASE_URL=https://api.quatarly.cloud/v0
+railway variables set CHAT_MODEL=claude-sonnet-4-5
+```
 
 ## Przykłady API (Quatarly)
 
@@ -59,18 +76,4 @@ Check credits:
 ```bash
 curl https://api.quatarly.cloud/v0/user/credits/YOUR_API_KEY \
   -H "Authorization: Bearer YOUR_API_KEY"
-```
-
-## Deploy (Railway)
-
-Ustaw w Railway:
-
-- `ANTHROPIC_API_KEY`
-- `ANTHROPIC_BASE_URL=https://api.quatarly.cloud/v0`
-- `CHAT_MODEL=claude-sonnet-4-5` (lub inny wspierany)
-
-Start command:
-
-```bash
-npm start
 ```
